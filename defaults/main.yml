@@ -12,7 +12,10 @@
 # Defaults
 ad_member_kerberos_method: "secrets and keytab"
 ad_member_automatic_homedir_creation: True
+
+# These options determine whether the domain should be appended to user names
 ad_member_sssd_fallback_homedir: '/home/%u'
+ad_member_sssd_use_fully_qualified_names: 'False'
 
 # Files
 ad_member_sssd_config_dir: '/etc/sssd'

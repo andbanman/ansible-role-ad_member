@@ -26,13 +26,24 @@
   notify:
     - sssd restart
 
-- name: Set the user's homedir path
+- name: Set sssd fallback_homedir
   tags: ad_member
   lineinfile:
     path: "{{ ad_member_sssd_config_path }}"
     regexp: '^\s*fallback_homedir\s*=.*'
     insertafter: "^[domain/{{ ad_member_domain_l }}]"
     line: "fallback_homedir = {{ ad_member_sssd_fallback_homedir }}"
+    state: present
+  notify:
+    - sssd restart
+
+- name: Set sssd use_fully_qualified_names
+  tags: ad_member
+  lineinfile:
+    path: "{{ ad_member_sssd_config_path }}"
+    regexp: '^\s*use_fully_qualified_names\s*=.*'
+    insertafter: "^[domain/{{ ad_member_domain_l }}]"
+    line: "use_fully_qualified_names = {{ ad_member_sssd_use_fully_qualified_names }}"
     state: present
   notify:
     - sssd restart
