@@ -2,7 +2,7 @@
 - name: Install packages
   tags: ad_member
   package:
-    name: "{{ ad_member_sssd_packages + ad_member_realmd_packages + ad_member_pam_packages }}"
+    name: "{{ ad_member_packages }}"
     state: present
 
 # TODO option to use a configuration template
@@ -22,7 +22,7 @@
   tags: ad_member
   # do not log to preserve password secrecy
   no_log: True
-  shell: "realm join -v --user {{ ad_member_kerberos_user }} --one-time-password={{ ad_member_kerberos_pass }} --os-name={{ ansible_distribution }} --os-version={{ ansible_distribution_version }} {{ ad_member_domain }}"
+  shell: "echo {{ ad_member_kerberos_pass }} | realm join -v --user {{ ad_member_kerberos_user }} --os-name={{ ansible_distribution }} --os-version={{ ansible_distribution_version }} {{ ad_member_domain }}"
   notify:
     - sssd restart
 

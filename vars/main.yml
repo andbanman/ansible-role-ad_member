@@ -5,9 +5,8 @@ ad_member_domain_u: "{{ ad_member_domain|upper }}"
 
 # Packages
 # TODO switch on ansible_distribution
-ad_member_pam_packages: [libpam-modules]
-ad_member_sssd_packages: [sssd, sssd-ad, sssd-tools]
-ad_member_realmd_packages: [realmd, adcli]
+# XXX I don't like having to use packagekit but realm fails without it
+ad_member_packages: [realmd, sssd-tools, sssd, libnss-sss, libpam-sss, adcli, packagekit]
 
 # Services
 ad_member_sssd_service_name: sssd
