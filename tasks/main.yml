@@ -18,7 +18,14 @@
 #    - sssd restart
 #XXX Joining the domain will create an sssd config with reasonable defaults
 
+- name: Query realms
+  tags: ad_member
+  command: "realm list -an"
+  register: ad_member_realm_query
+  changed_when: false
+
 - name: Join to the domain
+  when: "ad_member_domain_l not in ad_member_realm_query.stdout"
   tags: ad_member
   # do not log to preserve password secrecy
   no_log: True
@@ -56,17 +63,17 @@
 # restart services so test gets up to date config
 - meta: flush_handlers
 
-- name: Query AD user
-  tags: ad_member
-  command: "id -u {{ ad_member_test_user }}"
-  register: ad_member_user_query
+- name: Test join was successfull
   when: "ad_member_test_user is defined and ad_member_test_user_uid is defined"
-  changed_when: false
+  tags: ad_member
+  block:
+    - name: Query AD user
+      command: "id -u {{ ad_member_test_user }}"
+      register: ad_member_user_query
+      changed_when: false
 
-- name: Test join was successful
-  tags: ad_member
-  when: "ad_member_test_user is defined and ad_member_test_user_uid is defined"
-  assert:
-    that:
-      - "ad_member_test_user_uid in ad_member_user_query.stdout"
-  ignore_errors: "{{ ansible_check_mode }}"
+    - name: Test join was successful
+      assert:
+        that:
+          - "ad_member_test_user_uid in ad_member_user_query.stdout"
+      ignore_errors: "{{ ansible_check_mode }}"

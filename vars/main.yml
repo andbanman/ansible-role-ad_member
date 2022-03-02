@@ -10,3 +10,4 @@ ad_member_packages: [realmd, sssd-tools, sssd, libnss-sss, libpam-sss, adcli, pa
 
 # Services
 ad_member_sssd_service_name: sssd
+ad_member_sssd_config_path: /etc/sssd/sssd.conf
