@@ -1,9 +1,0 @@
----
-- name: Set default realm
-  tags: ad_member
-  lineinfile:
-    path: "{{ ad_member_kerberos_config_path }}"
-    regexp: '^\s*default_realm\s*='
-    insertafter: "^[[]libdefaults[]]"
-    line: "default_realm = {{ ad_member_domain_u }}"
-    state: present
