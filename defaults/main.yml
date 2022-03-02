@@ -11,16 +11,11 @@
 
 # Defaults
 ad_member_kerberos_method: "secrets and keytab"
-ad_member_winbind_domain_backend: nss
-ad_member_winbind_domain_range: "200000-2147483647"
-ad_member_winbind_default_backend: tdb
-ad_member_winbind_default_range: "10000-199999"
 ad_member_automatic_homedir_creation: True
+ad_member_sssd_fallback_homedir: '/home/%u'
 
 # Files
 ad_member_sssd_config_dir: '/etc/sssd'
 ad_member_sssd_config_file: "{{ ad_member_sssd_config_dir }}/sssd.conf"
-ad_member_samba_config_dir: '/etc/samba'
-ad_member_samba_config_file: "{{ ad_member_samba_config_dir }}/smb.conf"
 ad_member_kerberos_config_path: "/etc/krb5.conf"
 ad_member_pam_config_dir: '/etc/pam.d'

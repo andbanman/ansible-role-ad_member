@@ -2,9 +2,9 @@
 
 Join a Linux host to an Active Directory domain as a domain member.
 
-Configuring identity mapping between AD users/groups and Unix UID/GIGs is often the most difficult part of joining linux to AD. The two mapping options are winbind and sssd, where sssd is preferred since it does not require a local database and is consistent accross hosts. Starting with Samba 4.8.0, winbind must be installed to connect to AD; strictly speaking this only affects hosts that serve samba file shares, while other hosts can continue to use sssd for system authentication (pam, nss, etc). Typically winbind and sssd are mutually exclusive, but this role uses the winbind nss backend to allow sssd and winbind to coexist.
+Configuring identity mapping between AD users/groups and Unix UID/GIGs is often the most difficult part of joining linux to AD. The two mapping options are winbind and sssd, where sssd is preferred since it does not require a local database and is consistent accross hosts. Starting with Samba 4.8.0, winbind must be installed to connect to AD; strictly speaking this only affects hosts that serve samba file shares, while other hosts can continue to use sssd for system authentication (pam, nss, etc). As such, this role does not permit a working Samba server.
 
-The resulting configuration integrates AD into Linux authentication stack with sssd and provides a full featured samba server for file sharing. Both `getent` and `wbinfo` should work to resolve users and groups from AD.
+To join a Linux Samba server to an AD domain, see role ansible-role-ad_member_samba.
 
 ## Requirements
 

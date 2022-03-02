@@ -5,12 +5,9 @@ ad_member_domain_u: "{{ ad_member_domain|upper }}"
 
 # Packages
 # TODO switch on ansible_distribution
-ad_member_samba_packages: [samba, winbind, libnss-winbind]
 ad_member_pam_packages: [libpam-modules]
-ad_member_sssd_packages: [sssd, sssd-common, libnss-sss, libpam-sss]
-ad_member_kerberos_packages: [krb5-user]
+ad_member_sssd_packages: [sssd, sssd-ad, sssd-tools]
+ad_member_realmd_packages: [realmd, adcli]
 
 # Services
 ad_member_sssd_service_name: sssd
-ad_member_samba_service_name: smbd
-ad_member_winbind_service_name: winbind
