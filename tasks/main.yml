@@ -58,9 +58,10 @@
 - name: Enable PAM automatic homedir creation
   when: ad_member_automatic_homedir_creation
   tags: ad_member
-  shell: "pam-auth-update --enable mkhomedir"
+  shell: "pam-auth-update --package --enable mkhomedir"
 
 # restart services so test gets up to date config
+# TODO not running handler!
 - meta: flush_handlers
 
 - name: Test join was successfull
