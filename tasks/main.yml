@@ -25,7 +25,7 @@
   changed_when: false
 
 - name: Join to the domain
-  when: "ad_member_domain_l not in ad_member_realm_query.stdout"
+  when: "ad_member_realm_query.stdout is defined and ad_member_domain_l not in ad_member_realm_query.stdout"
   tags: ad_member
   # do not log to preserve password secrecy
   no_log: True
@@ -74,7 +74,7 @@
       changed_when: false
 
     - name: Test join was successful
+      when: 'ad_member_user_query.stdout is defined'
       assert:
         that:
           - "ad_member_test_user_uid in ad_member_user_query.stdout"
-      ignore_errors: "{{ ansible_check_mode }}"
