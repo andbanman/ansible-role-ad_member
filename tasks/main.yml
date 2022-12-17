@@ -65,7 +65,7 @@
 - meta: flush_handlers
 
 - name: Test join was successfull
-  when: "ad_member_test_user is defined and ad_member_test_user_uid is defined"
+  when: "not ansible_check_mode and ad_member_test_user is defined and ad_member_test_user_uid is defined"
   tags: ad_member
   block:
     - name: Query AD user
